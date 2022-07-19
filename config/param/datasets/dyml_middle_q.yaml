@@ -1,0 +1,10 @@
+DVR_animal_Test:
+  params:
+    # dataset: ../../datasets/DyML/dyml_animal
+    dataset: ../../datasets/DyML/dyml_vehicle
+    level: middle
+    mode: query
+    transform:
+      - ~~_SEARCH_WITH_SAME_NAME_
+      - transforms
+      - null

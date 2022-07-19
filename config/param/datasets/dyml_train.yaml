@@ -1,0 +1,10 @@
+DyMLDataset:
+  params:
+    # dataset_path: ../../datasets/DyML/dyml_animal
+    dataset_path: ../../datasets/DyML/dyml_vehicle
+    m_per_level: [2, 2, 2, 2]
+    drop_extra: false
+    transform:
+      - ~~_SEARCH_WITH_SAME_NAME_
+      - transforms
+      - null

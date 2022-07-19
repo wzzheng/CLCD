@@ -1,0 +1,6 @@
+BatchNormMLP:
+  params:
+    layer_size_list: [512, 32]
+    relu_list: [false]
+    bn_list: [false]
+    bias_list: [false]

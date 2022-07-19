@@ -1,0 +1,4 @@
+input: [_]
+map:
+  default:
+    _: 0

@@ -1,0 +1,7 @@
+Adam:
+  params:
+    params: 
+      - ~~_SEARCH_WITH_SAME_NAME_
+      - models
+      - null
+    lr: 0.001

@@ -1,0 +1,6 @@
+MultiPosPairLoss: 
+  params:
+    mask_rules:
+      # - [true, null]
+      - [null, true]
+      # - [null, true]

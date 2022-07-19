@@ -1,0 +1,5 @@
+ResNet34_BN:
+  params:
+    pretrained: true # false for animal, true for vehicle and product
+    syncBN: true
+  INITIATE: delete_last_linear

@@ -1,0 +1,5 @@
+ResNet50_BN:
+  params:
+    pretrained: false
+    syncBN: true
+  INITIATE: delete_last_linear

@@ -1,0 +1,7 @@
+CosineAnnealingLR:
+  params:
+    optimizer:
+      - ~~_SEARCH_WITH_SAME_NAME_
+      - optimizers
+      - none
+    T_max: 100

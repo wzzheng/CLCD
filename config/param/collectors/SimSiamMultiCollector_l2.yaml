@@ -1,0 +1,9 @@
+SimSiamMultiCollector:
+  params: 
+    metric: 
+      - ~~_SEARCH_WITH_TARGET_NAME_
+      - metrics
+      - default
+    reduction_size: [512, 256, 128]
+    first_bn: true
+    last_bn: false

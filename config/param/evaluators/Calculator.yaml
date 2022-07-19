@@ -1,0 +1,4 @@
+Calculator:
+  params:
+    k_list: [1, 10, 20]
+    exclude: ["f1_score"]

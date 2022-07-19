@@ -1,0 +1,9 @@
+SimSiamFullCollector:
+  params: 
+    metric: 
+      - ~~_SEARCH_WITH_TARGET_NAME_
+      - metrics
+      - default
+    layer_size_list: [512, 256, 512]
+    is_same_source: false
+    first_bn: true

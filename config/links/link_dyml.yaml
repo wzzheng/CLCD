@@ -1,0 +1,100 @@
+# evaluate on avgpool or proj
+# projector bias
+# pretrained
+
+# predictor dims?
+# mask generation
+# projector dims 512
+# evaluation metrics 
+# optimizer(sgd simsiam, adamw)
+# scheduler(cosine simsiam, step_lr)
+# transformation(moco simsiam, plain)
+
+metrics:
+  - default: cosine.yaml
+
+collectors:
+  - default: SimSiamMultiCollector.yaml
+
+selectors:
+  - default: DefaultSelector.yaml
+
+losses:
+  - default: MultiPosPairLoss.yaml
+
+models:
+  - trunk: _resnet34_bn.yaml
+  # - trunk: bninception_bn.yaml
+  # consider put proj_bn here
+  - embedder: _simsiam_refined_projector.yaml
+
+evaluators:
+  - default: Calculator.yaml
+
+# optimizers:
+#   - trunk: SGD.yaml
+#   - embedder: SGD.yaml
+#   - default: SGD_collectors.yaml
+
+optimizers:
+  - trunk: AdamW_models.yaml
+  - embedder: AdamW_models.yaml
+  - default: AdamW_collectors.yaml
+
+schedulers:
+  - trunk: step_lr.yaml
+  - embedder: step_lr.yaml
+  - default: step_lr.yaml
+
+gradclipper:
+  - trunk: gradclipper_models.yaml
+  - embedder: gradclipper_models.yaml
+  - default: gradclipper_collectors.yaml
+
+transforms:
+  - train: train_crop2_transforms.yaml
+  - test_coarse_q: eval_transforms.yaml
+  - test_coarse_g: eval_transforms.yaml
+  - test_middle_q: eval_transforms.yaml
+  - test_middle_g: eval_transforms.yaml
+  - test_fine_q: eval_transforms.yaml
+  - test_fine_g: eval_transforms.yaml
+
+datasets:
+  - train: dyml_train.yaml
+  - test_coarse_q: dyml_coarse_q.yaml
+  - test_coarse_g: dyml_coarse_g.yaml
+  - test_middle_q: dyml_middle_q.yaml
+  - test_middle_g: dyml_middle_g.yaml
+  - test_fine_q: dyml_fine_q.yaml
+  - test_fine_g: dyml_fine_g.yaml
+
+# samplers:
+#   - train: _MPerClassFullSampler.yaml
+
+collatefns:
+  - train: dyml_collatefn.yaml
+
+recorders:
+  - default: base_recorder.yaml
+
+trainers: 
+  - default: BaseTrainer.yaml
+
+# only applicable to animal and vehicle
+testers:
+  - default: qg_tester.yaml
+
+managers:
+  - default: BaseManager.yaml
+
+LINK_SETTING: 
+  to_device_list: [models, collectors, losses]
+  to_wrap_list: [models, collectors]
+
+PIPELINE_SETTING:
+  - models/trunk/default -> models/embedder/
+  - models/embedder/default -> collectors/default/
+  - collectors/default/default -> selectors/default/
+  - selectors/default/default -> losses/default/
+  - losses/default/default -> FINISH/default/loss

@@ -1,0 +1,8 @@
+DVR_product_Test:
+  params:
+    dataset: ../../datasets/DyML/dyml_product
+    level: fine
+    transform:
+      - ~~_SEARCH_WITH_SAME_NAME_
+      - transforms
+      - null
